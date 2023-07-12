@@ -28,7 +28,7 @@ If all assertions pass, then your solution will be accepted.
 
  
 
-Example 1:
+## Example 1:
 
 ```
 Input: nums = [3,2,2,3], val = 3
@@ -37,7 +37,7 @@ Explanation: Your function should return k = 2, with the first two elements of n
 It does not matter what you leave beyond the returned k (hence they are underscores).
 ```
 
-Example 2:
+## Example 2:
 
 ```
 Input: nums = [0,1,2,2,3,0,4,2], val = 2
@@ -48,7 +48,7 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 ```
  
 
-Constraints:
+## Constraints:
 
 ```
 0 <= nums.length <= 100

@@ -27,7 +27,7 @@ If all assertions pass, then your solution will be accepted.
 
  
 
-Example 1:
+## Example 1:
 
 ```
 Input: nums = [1,1,1,2,2,3]
@@ -36,7 +36,8 @@ Explanation: Your function should return k = 5, with the first five elements of 
 It does not matter what you leave beyond the returned k (hence they are underscores).
 
 ```
-Example 2:
+
+## Example 2:
 
 ```
 Input: nums = [0,0,1,1,1,1,2,3,3]
@@ -46,7 +47,7 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 ```
  
 
-Constraints:
+## Constraints:
 
 ```
 1 <= nums.length <= 3 * 104
