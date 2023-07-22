@@ -6,10 +6,6 @@ public:
         int ans = 0;
         for(int j = n-1; j >= 0; j--) {
             if(ans > 0 && s[j] == ' ') break;
-            while(s[j] == ' ' && ans == 0) {
-                j--;
-                continue;
-            }
             if(s[j] != ' ') {
                 ans++;
             }
