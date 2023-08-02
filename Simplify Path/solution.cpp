@@ -4,7 +4,7 @@ public:
         stack<string> st;
         string res;
         
-        for(int i = 0;  i < path.size(); ++i) {
+        for(int i = 0;  i < path.size(); i++) {
             if(path[i] == '/')
                 continue;
             string temp;
