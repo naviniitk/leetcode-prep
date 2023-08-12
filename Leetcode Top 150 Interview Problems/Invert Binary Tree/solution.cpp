@@ -16,7 +16,7 @@ public:
             return NULL;
         invertTree(root->left);
         invertTree(root->right);
-        // Swap the nodes
+        
         TreeNode* temp = root->left;
         root->left = root->right;
         root->right = temp;
