@@ -1,58 +1,64 @@
 class Solution
 {
 public:
-  void dfs(string node, string &dest, unordered_map<string, vector<pair<string, double>>> &mp, double &val, double &res, unordered_set<string> &vis)
+  void dfs(string node, string &dest, unordered_map<string, unordered_map<string, double>> &gr, unordered_set<string> &vis, double &ans, double temp)
   {
     if (vis.find(node) != vis.end())
       return;
+
     vis.insert(node);
     if (node == dest)
     {
-      res = val;
+      ans = temp;
       return;
     }
 
-    for (auto it : mp[node])
+    for (auto ne : gr[node])
     {
-      if (vis.find(it.first) == vis.end())
-      {
-        double val1 = val;
-        val = val * it.second;
-        dfs(it.first, dest, mp, val, res, vis);
-        val = val1;
-      }
+      dfs(ne.first, dest, gr, vis, ans, temp * ne.second);
     }
   }
-  vector<double> calcEquation(vector<vector<string>> &equations, vector<double> &values, vector<vector<string>> &queries)
+
+  unordered_map<string, unordered_map<string, double>> buildGraph(const vector<vector<string>> &equations, const vector<double> &values)
   {
-    vector<double> ans;
-    unordered_map<string, vector<pair<string, double>>> mp;
+    unordered_map<string, unordered_map<string, double>> gr;
+
     for (int i = 0; i < equations.size(); i++)
     {
-      string node = equations[i][0];
-      string dest = equations[i][1];
-      double val = values[i];
-      mp[node].push_back({dest, val});
-      mp[dest].push_back({node, (1.0 / (1.0 * val))});
+      string dividend = equations[i][0];
+      string divisor = equations[i][1];
+      double value = values[i];
+
+      gr[dividend][divisor] = value;
+      gr[divisor][dividend] = 1.0 / value;
     }
-    for (int i = 0; i < queries.size(); i++)
+
+    return gr;
+  }
+
+  vector<double> calcEquation(vector<vector<string>> &equations, vector<double> &values, vector<vector<string>> &queries)
+  {
+    unordered_map<string, unordered_map<string, double>> gr = buildGraph(equations, values);
+    vector<double> finalAns;
+
+    for (auto query : queries)
     {
+      string dividend = query[0];
+      string divisor = query[1];
 
-      string node = queries[i][0];
-      string dest = queries[i][1];
-
-      if (mp.find(node) == mp.end() or mp.find(dest) == mp.end())
+      if (gr.find(dividend) == gr.end() || gr.find(divisor) == gr.end())
       {
-        ans.push_back(-1);
+        finalAns.push_back(-1.0);
       }
       else
       {
         unordered_set<string> vis;
-        double val = 1.0, res = -1;
-        dfs(node, dest, mp, val, res, vis);
-        ans.push_back(res);
+        double ans = -1, temp = 1.0;
+        dfs(dividend, divisor, gr, vis, ans, temp);
+        finalAns.push_back(ans);
       }
     }
-    return ans;
+
+    return finalAns;
   }
 };
